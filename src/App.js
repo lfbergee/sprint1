@@ -6,7 +6,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import Demo1 from "./pages/Demo1";
 
-import "./fremtind";
+import "@fremtind/jkl-core/core.min.css";
+import "@fremtind/jkl-button/button.min.css";
+
 import "./style.scss";
 
 function App() {
