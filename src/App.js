@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { initTabListener } from "@fremtind/jkl-core";
 import { reducer, initialState, Context as UserContext } from "./store/user";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Login from "./pages/Login";
 import Demo1 from "./pages/Demo1";
+import FirebaseProvider from "./utils/firebase";
+
 
 import "@fremtind/jkl-core/core.min.css";
 import "@fremtind/jkl-button/button.min.css";
@@ -12,23 +12,22 @@ import "@fremtind/jkl-button/button.min.css";
 import "./style.scss";
 
 function App() {
-  const user = React.useReducer(reducer, initialState);
+  const userStore = React.useReducer(reducer, initialState);
 
   useEffect(() => {
     initTabListener();
   }, []);
 
   return (
-    <UserContext.Provider value={user}>
-      <BrowserRouter>
-        <Switch>
-          <ProtectedRoute path="/demo" exact>
-            <Demo1 />
-          </ProtectedRoute>
-          <Route path="/" component={Login} />
-        </Switch>
-      </BrowserRouter>
-    </UserContext.Provider>
+    <FirebaseProvider>
+      <UserContext.Provider value={userStore}>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" exact component={Demo1} />
+          </Switch>
+        </BrowserRouter>
+      </UserContext.Provider>
+    </FirebaseProvider>
   );
 }
 

@@ -1,6 +1,6 @@
 import { actionTypes } from "./actionTypes";
 
-const login = dispatch => dispatch({ type: actionTypes.AUTHENTICATE });
+const login = (dispatch, payload) => dispatch({ type: actionTypes.AUTHENTICATE, payload });
 
 export const actions = {
   login
